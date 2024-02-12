@@ -6,26 +6,41 @@
             <div class="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 draggable">
                 <div class="flex items-center justify-center w-full lg:p-12">
                     <div class="flex items-center xl:p-10">
-                        <form class="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl" action="{% url 'register' %}" method="post">
+                        <form class="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl"
+                              action="{% url 'register' %}" method="post">
                             {% csrf_token %}
                             <h3 class="mb-3 text-4xl font-extrabold text-dark-grey-900">Register</h3>
                             <p class="mb-4 text-grey-700">Create your account</p>
-                            
-                            <label for="name" class="mb-2 text-sm text-start text-grey-900">Name*</label>
-                            <input name="name" id="name" placeholder="Enter your name"
+
+                            <label for="first_name" class="mb-2 text-sm text-start text-grey-900">Name*</label>
+                            <input name="first_name" id="first_name" placeholder="Enter your name"
                                    class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                            
+
+                            <label for="last_name" class="mb-2 text-sm text-start text-grey-900">Last name*</label>
+                            <input name="last_name" id="last_name" placeholder="Enter your last name"
+                                   class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
+
                             <label for="email" class="mb-2 text-sm text-start text-grey-900">Email*</label>
                             <input name="email" id="email" type="email" placeholder="mail@loopple.com"
                                    class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
+
                             <label for="password" class="mb-2 text-sm text-start text-grey-900">Password*</label>
                             <input name="password" id="password" type="password" placeholder="Enter a password"
                                    class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                            
-                            <label for="password2" class="mb-2 text-sm text-start text-grey-900">Password confirmation*</label>
+
+                            <label for="password2" class="mb-2 text-sm text-start text-grey-900">Password
+                                confirmation*</label>
                             <input name="password2" id="password2" type="password" placeholder="Confirm your password"
                                    class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                            
+                            {% if error %}
+                                <div class="text-red-500 mb-5">
+                                    <strong>Error:</strong>
+                                    <ul>
+                                            <li>{{ error }}</li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+
                             <div class="flex flex-row justify-between mb-8">
                                 <label class="relative inline-flex items-center mr-3 cursor-pointer select-none">
                                     <input type="checkbox" checked value="" class="sr-only peer">
