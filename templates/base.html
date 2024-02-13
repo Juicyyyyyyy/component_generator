@@ -77,7 +77,7 @@
 
         {% if user.is_authenticated %}
             <!-- Show profile icon or user-related links when authenticated -->
-            <div class="flex items-center">
+            <div class="flex items-center pr-5">
                 <div x-data="{ open: false }"
                      class="bg-white dark:bg-gray-800 w-64  flex justify-center items-center z-50">
                     <div @click="open = !open" class="relative border-b-4 border-transparent py-3"
