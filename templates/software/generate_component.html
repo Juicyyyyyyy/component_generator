@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <main class="bg-gray-200">
+            <div class="generator-customization-container">
+                {% for parameter in parameters %}
+                    <div class="customization-select-wrapper">
+                        <select class="customization-select" name="{{ parameter.name }}">
+                            <option selected value="0">{{ parameter.name }}</option>
+                            {% for option in parameter_options %}
+                                {% if option.id_parameter.id == parameter.id %}
+                                    <option value="{{ option.value }}">{{ option.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+
+        <style>
+            :root {
+                --primary-color: #3498db;
+                --secondary-color: #2ecc71;
+                --text-color: #333;
+            }
+
+            body {
+                margin: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(35deg, #ecf0f1, #bdc3c7);
+            }
+
+            .generator-customization-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .customization-select-wrapper {
+                position: relative;
+                margin: 0.5rem;
+            }
+
+            .customization-select {
+                appearance: none;
+                border: 0;
+                outline: 0;
+                font: inherit;
+                width: 20rem;
+                padding: 1rem;
+                background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+                color: white;
+                border-radius: 0.25em;
+                box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                position: relative;
+                z-index: 1;
+            }
+
+            .customization-select::after {
+                content: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+                position: absolute;
+                top: 50%;
+                right: 1rem;
+                transform: translateY(-50%);
+                z-index: 0;
+            }
+
+            /* Remove IE arrow */
+            .customization-select::-ms-expand {
+                display: none;
+            }
+
+            /* Remove focus outline */
+            .customization-select:focus {
+                outline: none;
+            }
+
+            /* <option> colors */
+            .customization-select option {
+                color: var(--text-color);
+                background-color: white;
+            }
+        </style>
+
+    {% else %}
+        <script>
+            window.location.href = "{% url 'login' %}";
+        </script>
+    {% endif %}
+
+{% endblock %}

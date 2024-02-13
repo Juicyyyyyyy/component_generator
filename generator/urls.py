@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('generate-component', views.generate_component, name='generate-component'),
+    path('software/generate_component/', views.generate_component, name='generate_component'),
 ]

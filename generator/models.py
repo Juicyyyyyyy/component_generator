@@ -30,6 +30,7 @@ class Parameter(models.Model):
 class ParameterOption(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    value = models.TextField()
     id_parameter = models.ForeignKey(Parameter, on_delete=models.CASCADE)
 
 
