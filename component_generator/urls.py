@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing_page.urls')),
     path('', include('authentication.urls')),
-    path('', include('generator.urls'))
+    path('', include('generator.urls')),
+    path('', include('personal_profile.urls'))
 ]
