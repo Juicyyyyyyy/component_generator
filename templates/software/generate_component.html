@@ -6,12 +6,15 @@
 
             <aside class="w-1/3 p-6 bg-gradient-to-r from-indigo-900 to-indigo-600 text-white rounded-md shadow-lg">
                 <h2 class="text-4xl font-bold mb-6">Customize Your Component</h2>
-
+            <label class="block text-sm font-semibold mb-2 text-gray-200" for="description">Description</label>
+            <form method="post" action="{% url 'generate_component' %}">
+                    {% csrf_token %}
+                <textarea name="description" class="customization-textarea w-full px-4 py-2 bg-white text-gray-800 border-2 border-purple-300 rounded-md resize-none focus:outline-none focus:border-purple-500 transition duration-300 mb-6" placeholder="Describe the component that you want"></textarea>
                 {% for parameter in parameters %}
                     <div class="mb-6">
-                        <label class="block text-sm font-semibold mb-2 text-gray-200">{{ parameter.name }}</label>
-                        <select class="customization-select w-full px-4 py-2 bg-white text-gray-800 border-2 border-purple-300 rounded-md focus:outline-none focus:border-purple-500 transition duration-300">
-                            <option selected disabled hidden class="text-black">Select {{ parameter.name }}</option>
+                        <label class="block text-sm font-semibold mb-2 text-gray-200" for="{{ parameter.name | slugify }}">{{ parameter.name }}</label>
+                        <select name="{{ parameter.name }}" class="customization-select w-full px-4 py-2 bg-white text-gray-800 border-2 border-purple-300 rounded-md focus:outline-none focus:border-purple-500 transition duration-300">
+                            <option selected disabled hidden class="text-black">select {{ parameter.name }}</option>
                             {% for option in parameter_options %}
                                 {% if option.id_parameter.id == parameter.id %}
                                     <option value="{{ option.value }}" class="text-gray-800">{{ option.name }}</option>

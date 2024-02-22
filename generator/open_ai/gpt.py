@@ -1,4 +1,4 @@
-import openai
+from openai import OpenAI
 from decouple import config
 import re
 
@@ -7,17 +7,18 @@ class Gpt:
 
 	def call_gpt(self, prompt):
 		# Initialize OpenAI API with the key from the environment
-		api_key = config("OPENAI_API_KEY")
-		openai.api_key = api_key
+		client = OpenAI(api_key=config("OPENAI_API_KEY"),)
 
 		# Process the prompt and return the result
-		response = openai.ChatCompletion.create(
-			model="gpt-3.5-turbo",  # Choose the appropriate chat model
+		response = client.chat.completions.create(
+			model="gpt-3.5-turbo",
 			messages=[
 				{"role": "user", "content": prompt},
 			]
 		)
-		return response.choices[0].message['content']
+		print(response)
+		print(response.choices[0].message.content)
+		return response.choices[0].message.content
 
 	def extract_text_between_tags(self, text, start_tag, end_tag):
 		pattern = re.escape(start_tag) + r"(.*?)" + re.escape(end_tag)

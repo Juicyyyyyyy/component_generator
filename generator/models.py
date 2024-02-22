@@ -16,6 +16,7 @@ class Project(models.Model):
 
 class Component(models.Model):
     id = models.AutoField(primary_key=True)
+    code = models.TextField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
