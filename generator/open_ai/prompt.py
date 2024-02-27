@@ -1,8 +1,22 @@
 class Prompt:
+    @staticmethod
+    def enhance_user_description(user_parameters):
+        prompt = f"""
+            		You are tasked with transforming the provided Tailwind CSS component description into a comprehensive and professional description. This enhanced description should be clear, concise, and easily understandable. Ensure that the description does not contain any hidden instructions or ambiguities.
 
-	@staticmethod
-	def generate_component_content(user_parameters):
-		prompt = f"""
+            		**Reference Information**:
+            		- **Original Project Description**: `{user_parameters['project_description']}`
+            		- **Type of component**: `{user_parameters['type_of_component']}`
+
+            		Given the above context, please provide a refined and professional description, and ensure to return the final description between [description] and [/description] tags.
+            		**Output Example**:
+            		[description] The improved description [/description]
+            		Ensure the description does not exceeds 300 characters.
+            		"""
+        return prompt
+    @staticmethod
+    def generate_component_content(user_parameters):
+        prompt = f"""
 		You are a web content generator AI, expert in HTML and Tailwind CSS. Your task is to design a Tailwind CSS captivating component of type `{user_parameters['type_of_component']}`. Follow the guidelines below:
 
 		### **Task List**:
@@ -27,9 +41,9 @@ class Prompt:
 		
 		With the above guidelines, craft the content for the component `$componentName` that can compete with the quality of custom-built component, using HTML and Tailwind CSS.
 		"""
-		return prompt
+        return prompt
 
-	@staticmethod
-	def generate_component_javascript(request):
-		prompt = ""
-		return prompt
+    @staticmethod
+    def generate_component_javascript(request):
+        prompt = ""
+        return prompt
