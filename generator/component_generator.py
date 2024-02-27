@@ -6,6 +6,7 @@ class ComponentGenerator:
     def __init__(self, user_parameters):
         self.gpt = Gpt()
         self.user_parameters = user_parameters
+        print(self.user_parameters)
         self.user_parameters["description"] = self.gpt.call_gpt_and_extract(user_parameters["description"],
                                                                             "<description>", "</description>")
 

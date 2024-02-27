@@ -26,9 +26,12 @@
                 <button class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition duration-300">
                     Continue
                 </button>
+            </form>
+
             </aside>
 
 
+        {% if not component_has_been_generated %}
             <section class="w-2/3 p-6 bg-gray-100 rounded-md">
                 <h2 class="text-4xl font-bold mb-6 text-center text-indigo-700">The component will be displayed here</h2>
                 <div class="lottie-container">
@@ -38,8 +41,40 @@
                                    mode="normal"></lottie-player>
                 </div>
             </section>
+            {% else %}
+        <div class="flex flex-col w-2/3">
+            <section class="p-6 bg-gray-100 rounded-md mb-6">
+                <h2 class="text-4xl font-bold mb-6 text-center text-indigo-700">Generated Component</h2>
+                {% autoescape off %}
+                    {{ component_content }}
+                {% endautoescape %}
+            </section>
+
+            <section class="p-6 bg-gray-100 rounded-md">
+                <h2 class="text-4xl font-bold mb-6 text-center text-indigo-700">Generated Component HTML Code</h2>
+                <div class="code-container shadow-md">
+                    <pre class="language-html"><code>{{ component_content|escape }}</code></pre>
+                    <button onclick="copyToClipboard()" class="copy-button pl-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Copy Code</button>
+                </div>
+            </section>
+        </div>
+    {% endif %}
 
         </main>
+
+        <script>
+        // Function to copy code to clipboard
+            function copyToClipboard() {
+                var codeElement = document.querySelector('.code-container code');
+                var range = document.createRange();
+                range.selectNode(codeElement);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                alert('Code copied to clipboard!');
+            }
+        </script>
 
     {% else %}
         <script>

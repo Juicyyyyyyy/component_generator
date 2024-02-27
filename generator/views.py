@@ -5,8 +5,14 @@ from .component_generator import ComponentGenerator
 
 
 def generate_component(request):
+    component_has_been_generated = False
+    component_content = ''
     if request.method == 'POST':
+        print(request)
         form = ComponentForm(request.POST)
+        if not form.is_valid():
+            print("Form errors:", form.errors)
+
         if form.is_valid():
             description = form.cleaned_data['description']
             type_of_component = form.cleaned_data['type of component']
@@ -28,13 +34,18 @@ def generate_component(request):
 
             component_generator = ComponentGenerator(user_parameters)
             component_content = component_generator.generate_component()
+            print(component_content)
 
             component = Component.objects.create(code=component_content, project_id=project)
             component.save()
+
+            component_has_been_generated = True
     else:
         form = ComponentForm()
 
     parameters = Parameter.objects.all().order_by('order')
     parameter_options = ParameterOption.objects.all()
     return render(request, 'software/generate_component.html', {'parameters': parameters,
-                                                                'parameter_options': parameter_options, 'form': form})
+                                                                'parameter_options': parameter_options, 'form': form,
+                                                                'component_has_been_generated': component_has_been_generated,
+                                                                'component_content': component_content})

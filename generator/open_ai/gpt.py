@@ -16,7 +16,10 @@ class Gpt:
 				{"role": "user", "content": prompt},
 			]
 		)
-		print(response)
+		if response:
+			print(response)
+		else:
+			print("bug")
 		print(response.choices[0].message.content)
 		return response.choices[0].message.content
 
