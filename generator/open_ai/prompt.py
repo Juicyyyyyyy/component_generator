@@ -25,6 +25,7 @@ class Prompt:
 		**Design Reflection**: Consider the latest web design trends and how they can be incorporated into the component, exclusively using HTML and Tailwind CSS.
 		**Design Adherence**: Stick to the reference material to ensure the design is in line with the website's branding and style.
 		**Images**: - Use high-quality images from unsplash, ensure the unsplash links are made like this `https://source.unsplash.com/random?{{one_single_keyword_that_resonates_with_the_type_of_component_and_description}}`. Example : `https://source.unsplash.com/random?dog`. You will never put more than one word after the `random?`.
+		Ensure to put a max height and width to the image.
 		**Icons**: Exclusively utilize Font Awesome icons for all icon-related needs. NEVER put any SVG tag instead the code.
 		**Modern Aesthetics**: Emphasize modern design, responsiveness, and best practices in your component.
 		**Website Content**: Use the component description (accessible in the reference material) to fullfill the content of the component. Ensure the content is in the language : `${user_parameters['language']}`.
