@@ -11,7 +11,7 @@ class ComponentGenerator:
                                                                             "<description>", "</description>")
 
     def generate_component(self):
-
+        print(self.user_parameters)
         prompt_content = Prompt.generate_component_content(self.user_parameters)
         component_content = self.gpt.call_gpt_and_extract(prompt_content, "<component>", "</component>")
         return component_content

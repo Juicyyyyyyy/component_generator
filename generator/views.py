@@ -34,7 +34,6 @@ def generate_component(request):
 
             component_generator = ComponentGenerator(user_parameters)
             component_content = component_generator.generate_component()
-            print(component_content)
 
             component = Component.objects.create(code=component_content, project_id=project)
             component.save()
